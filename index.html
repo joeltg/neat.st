@@ -20,7 +20,7 @@
 		flex-direction: column;
 	}
 
-	marquee {
+	#neat {
 		position: absolute;
 		top: 0;
 		color: rebeccapurple;
@@ -33,11 +33,22 @@
 		white-space: pre;
 	}
 
+	#one {
+		position: absolute;
+		left: 1em;
+		height: 100%;
+		width: 40px;
+	}
+
+	#one img {
+		width: 100%;
+	}
+
 	div {
 		flex: 1;
 	}
 
-	img {
+	#street {
 		max-width: 100%;
 		max-height: 100%;
 		margin: auto;
@@ -46,8 +57,21 @@
 
 </style>
 <body>
-	<marquee direction="right" truespeed scrolldelay="45" scrollamount="8">neat-o&#9;&#9;neat-o&#9;&#9;neat-o&#9;&#9;neat-o&#9;&#9;neat-o&#9;&#9;neat-o</marquee>
+	<marquee id="one" loop="1" direction="down"><img src="piece2.png"/></marquee>
+	<marquee id="neat" direction="right" truespeed scrolldelay="45" scrollamount="8">neat-o&#9;&#9;neat-o&#9;&#9;neat-o&#9;&#9;neat-o&#9;&#9;neat-o&#9;&#9;neat-o</marquee>
 	<div></div>
-	<img src="street.png" />
+	<img id="street" src="street.png" />
 </body>
+<script>
+	const one = document.getElementById("one");
+	const pieces = ["piece.png", "piece5.png", "piece2.png", "piece3.png", "piece4.png"]
+
+	const select = () => pieces[Math.floor(Math.random() * 5)]
+	one.addEventListener("finish", () => {
+		console.log("finish!!")
+		one.firstElementChild.setAttribute("src", select())
+		one.start()
+		one.setAttribute("scrolldelay", 30 + Math.floor(Math.random() * 60))
+	})
+</script>
 </html>
